@@ -4,7 +4,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="libs/weka.jar" sourcepath="/home/brunoleal/Desktop/weka-src.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/home/brunoleal/Desktop/weka-3-6-13.2.zip!/weka-3-6-13/doc"/>
+			<attribute name="javadoc_location" value="jar:file:/home/brunoleal/Desktop/weka-3-6-13.zip!/weka-3-6-13/doc"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/commons-math3-3.5.jar" sourcepath="/home/brunoleal/Desktop/commons-math3-3.5-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/home/brunoleal/Desktop/commons-math3-3.5-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
