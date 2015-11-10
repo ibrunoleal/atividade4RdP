@@ -38,23 +38,7 @@ public class Exercicio1Functions {
 		fileHandler = new FileHandler(DATA_I_LABELS_TESTING, ";");
 		data_I_labels_testing = new ArrayRealVector(fileHandler.getVetor(0));
 	}
-
-	public RealMatrix get_Data_I_samples_learning() {
-		return data_I_samples_learning;
-	}
 	
-	public RealVector getData_I_labels_learning() {
-		return data_I_labels_learning;
-	}
-
-	public RealMatrix getData_I_samples_testing() {
-		return data_I_samples_testing;
-	}
-
-	public RealVector getData_I_labels_testing() {
-		return data_I_labels_testing;
-	}
-
 	public RealMatrix getMatrizPHI(RealMatrix m) {
 		RealMatrix temp = new Array2DRowRealMatrix(m.getRowDimension(), m.getColumnDimension() + 1);
 		for (int i = 0; i < m.getRowDimension(); i++) {
@@ -85,7 +69,7 @@ public class Exercicio1Functions {
 	}
 	
 	public int classificarY(double y) {
-		if (y >= 0.5) {
+		if (y > 0) {
 			return 1;
 		} else {
 			return 0;
@@ -100,13 +84,38 @@ public class Exercicio1Functions {
 					cont++;
 				}
 			}
-			System.out.println("cont: " + cont);
-			System.out.println("N: " + v1.getDimension());
 			double taxa = (cont * 100.0) / v1.getDimension();
 			return taxa;
 		}
-		
 		return 0;
 	}
 	
+	public double sumOfSquaresError(RealVector y, RealVector t) {
+		double sum = 0;
+		for (int i = 0; i < y.getDimension(); i++) {
+			double yi = y.getEntry(i);
+			double e = Math.pow((yi - t.getEntry(i)), 2);
+			sum += e;
+		}
+		
+		return sum/2.0;
+		
+	}
+	
+	public RealMatrix get_Data_I_samples_learning() {
+		return data_I_samples_learning;
+	}
+	
+	public RealVector getData_I_labels_learning() {
+		return data_I_labels_learning;
+	}
+
+	public RealMatrix getData_I_samples_testing() {
+		return data_I_samples_testing;
+	}
+
+	public RealVector getData_I_labels_testing() {
+		return data_I_labels_testing;
+	}
+
 }
