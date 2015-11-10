@@ -102,6 +102,11 @@ public class Exercicio1Functions {
 		
 	}
 	
+	public double yDaReta(RealVector w, double x, double c) {
+		double y = (c - (x * w.getEntry(2)) - w.getEntry(0)) / w.getEntry(1) ;
+		return y;
+	}
+	
 	public RealMatrix get_Data_I_samples_learning() {
 		return data_I_samples_learning;
 	}

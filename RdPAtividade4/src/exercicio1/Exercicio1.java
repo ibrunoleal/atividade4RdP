@@ -8,6 +8,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontosComReta;
 import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
 
 
@@ -67,10 +68,28 @@ public class Exercicio1 {
 				pontosClasse2.add(p);
 			}
 		}
+		
+		
+		double xMin = -18.0;
+		double xMax = 18.0;
+		double numBreaks = 1000.0;
+		double comprimento = (xMax - xMin) / numBreaks;
+		double xTemp = -18.0;
+		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
+		while(xTemp < xMax) {
+			double yTemp = f.yDaReta(w, xTemp, 2.5);
+			PontoDoGrafico ptemp = new PontoDoGrafico(xTemp, yTemp);
+			pontosDaReta.add(ptemp);
+			xTemp += comprimento;
+		}
+		
 		GraficoDePontos gp = new GraficoDePontos("Grafico", "");
 		gp.adicionarSerie(pontosClasse1, "Classe 1");
 		gp.adicionarSerie(pontosClasse2, "Classe 2");
+		gp.adicionarSerie(pontosDaReta, "Boundary");
 		gp.exibirGrafico();
+		
+		System.out.println();
 		
 		System.out.println("\n*******************************************************************");
 		System.out.println("Exercício 1.3)");
@@ -78,14 +97,7 @@ public class Exercicio1 {
 		double taxaDeSemelhanca = f.taxaDeSemelhanca(labelsPreditosTesting, t_testing);
 		System.out.println("Taxa de acerto para o testing: " + taxaDeSemelhanca  + "%");
 		
-		double xmin = -18;
-		double xmax = 18;
-		int numbreaks = 1000;
-		double xTemp = xmin;
-		int cont = 0;
-		while(cont < numbreaks) {
-			
-		}
+		
 		
 	}
 
