@@ -72,7 +72,7 @@ public class Exercicio1Functions {
 		if (y > 0) {
 			return 1;
 		} else {
-			return 0;
+			return -1;
 		}
 	}
 	

@@ -1,8 +1,14 @@
 package exercicio1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
+
+import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
 
 
 public class Exercicio1 {
@@ -38,14 +44,48 @@ public class Exercicio1 {
 			int classificacao = f.classificarY(yi);
 			labelsPreditosTesting.setEntry(i, classificacao);
 		}
+		//System.out.println(yPreditosTesting);
+		//System.out.println(labelsPreditosTesting);
 		
+		System.out.println("\n*******************************************************************");
 		System.out.println("Exercício 1.1)");
+		
 		double erro = f.sumOfSquaresError(yPreditosTesting, t_testing);
 		System.out.println("Sum of Squares Error: " + erro);
 		
-		System.out.println("Exercício 1.3)");
-		System.out.println("Taxa de acerto para o testing: " + f.taxaDeSemelhanca(labelsPreditosTesting, t_testing) + "%");
+		System.out.println("\n*******************************************************************");
+		System.out.println("Exercício 1.2)");
 		
+		List<PontoDoGrafico> pontosClasse1 = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico> pontosClasse2 = new ArrayList<PontoDoGrafico>();
+		for (int i = 0; i < f.getData_I_samples_testing().getRowDimension(); i++) {
+			RealVector xi = f.getData_I_samples_testing().getRowVector(i);
+			PontoDoGrafico p = new PontoDoGrafico(xi.getEntry(0), xi.getEntry(1));
+			if (labelsPreditosTesting.getEntry(i) == 1) {
+				pontosClasse1.add(p);
+			} else {
+				pontosClasse2.add(p);
+			}
+		}
+		GraficoDePontos gp = new GraficoDePontos("Grafico", "");
+		gp.adicionarSerie(pontosClasse1, "Classe 1");
+		gp.adicionarSerie(pontosClasse2, "Classe 2");
+		gp.exibirGrafico();
+		
+		System.out.println("\n*******************************************************************");
+		System.out.println("Exercício 1.3)");
+		
+		double taxaDeSemelhanca = f.taxaDeSemelhanca(labelsPreditosTesting, t_testing);
+		System.out.println("Taxa de acerto para o testing: " + taxaDeSemelhanca  + "%");
+		
+		double xmin = -18;
+		double xmax = 18;
+		int numbreaks = 1000;
+		double xTemp = xmin;
+		int cont = 0;
+		while(cont < numbreaks) {
+			
+		}
 		
 	}
 
