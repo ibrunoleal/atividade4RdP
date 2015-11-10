@@ -37,6 +37,10 @@ public class Exercicio1 {
 			labelsPreditosTesting.setEntry(i, classificacao);
 		}
 		
+		System.out.println(preditosTesting);
+		System.out.println(labelsPreditosTesting);
+		System.out.println(t_testing);
+		System.out.println(f.taxaDeSemelhanca(labelsPreditosTesting, t_testing));
 		
 	}
 
