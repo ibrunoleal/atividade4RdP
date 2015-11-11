@@ -1,4 +1,4 @@
-package exercicio1;
+package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class Exercicio1 {
 		double xTemp = -18.0;
 		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
 		while(xTemp < xMax) {
-			double yTemp = f.yDaReta(w, xTemp, 2.5);
+			double yTemp = f.yDaReta(w, xTemp, 0);
 			PontoDoGrafico ptemp = new PontoDoGrafico(xTemp, yTemp);
 			pontosDaReta.add(ptemp);
 			xTemp += comprimento;

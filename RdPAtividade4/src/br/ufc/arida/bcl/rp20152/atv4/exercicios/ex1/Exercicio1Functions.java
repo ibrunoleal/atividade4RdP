@@ -1,4 +1,4 @@
-package exercicio1;
+package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex1;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
