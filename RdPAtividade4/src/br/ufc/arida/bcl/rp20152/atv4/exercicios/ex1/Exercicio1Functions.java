@@ -103,7 +103,7 @@ public class Exercicio1Functions {
 	}
 	
 	public double yDaReta(RealVector w, double x, double c) {
-		double y = (c - (x * w.getEntry(2)) - w.getEntry(0)) / w.getEntry(1) ;
+		double y = (c - (x * w.getEntry(1)) - w.getEntry(0)) / w.getEntry(2) ;
 		return y;
 	}
 	

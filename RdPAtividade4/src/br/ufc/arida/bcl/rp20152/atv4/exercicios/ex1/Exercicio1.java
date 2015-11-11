@@ -96,9 +96,7 @@ public class Exercicio1 {
 		
 		double taxaDeSemelhanca = f.taxaDeSemelhanca(labelsPreditosTesting, t_testing);
 		System.out.println("Taxa de acerto para o testing: " + taxaDeSemelhanca  + "%");
-		
-		
-		
+			
 	}
 
 }
