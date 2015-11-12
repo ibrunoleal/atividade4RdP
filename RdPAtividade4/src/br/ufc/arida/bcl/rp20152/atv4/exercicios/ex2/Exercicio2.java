@@ -26,8 +26,8 @@ public class Exercicio2 {
 		double[][] covariances = {{1.0,-1.0},{-1.0,2.0}};
 		RealMatrix covarianceMatrix = new Array2DRowRealMatrix(covariances);
 		
-		RealMatrix samples1 = f.getRandomSamples(1000, means1, covarianceMatrix);
-		RealMatrix samples2 = f.getRandomSamples(1000, means2, covarianceMatrix);
+		RealMatrix samples1 = f.getNormalSamples(1000, means1, covarianceMatrix);
+		RealMatrix samples2 = f.getNormalSamples(1000, means2, covarianceMatrix);
 		
 		List<PontoDoGrafico> pontos1 = new ArrayList<PontoDoGrafico>();
 		List<PontoDoGrafico> pontos2 = new ArrayList<PontoDoGrafico>();
@@ -44,9 +44,9 @@ public class Exercicio2 {
 		g.adicionarSerie(pontos2, "C2");
 		g.exibirGrafico();
 
-		for (PontoDoGrafico pontoDoGrafico : pontos1) {
-			System.out.println(pontoDoGrafico.toStringCSV());
-		}
+		RealVector m1 = f.calcularM(samples1);
+		RealMatrix S1 = f.sW(m1, samples1);
+		System.out.println(S1);
 		
 	}
 
