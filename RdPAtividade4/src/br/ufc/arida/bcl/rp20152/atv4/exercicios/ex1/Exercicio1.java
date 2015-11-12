@@ -8,7 +8,6 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
-import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontosComReta;
 import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
 
 

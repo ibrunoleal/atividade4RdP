@@ -35,4 +35,8 @@ public class PontoDoGrafico {
 		return "(" + x + ", " + y + ")";
 	}
 	
+	public String toStringCSV() {
+		return x + "," + y;
+	}
+	
 }

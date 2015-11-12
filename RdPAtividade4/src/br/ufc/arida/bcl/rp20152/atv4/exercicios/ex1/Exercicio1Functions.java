@@ -99,7 +99,6 @@ public class Exercicio1Functions {
 		}
 		
 		return sum/2.0;
-		
 	}
 	
 	public double yDaReta(RealVector w, double x, double c) {
