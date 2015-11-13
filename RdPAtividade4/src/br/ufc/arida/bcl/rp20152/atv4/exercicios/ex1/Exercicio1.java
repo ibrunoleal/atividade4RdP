@@ -73,7 +73,7 @@ public class Exercicio1 {
 		double xMax = 18.0;
 		double numBreaks = 1000.0;
 		double comprimento = (xMax - xMin) / numBreaks;
-		double xTemp = -18.0;
+		double xTemp = xMin;
 		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
 		while(xTemp < xMax) {
 			double yTemp = f.yDaReta(w, xTemp, 0);

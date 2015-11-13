@@ -52,7 +52,6 @@ public class Exercicio2 {
 			RealVector xi = samples1.getRowVector(i);
 			double yi = f.yPredito(xi, w);
 			yPreditos1.setEntry(i, yi);
-			System.out.println(yi);
 		}
 		
 		RealVector yPreditos2 = new ArrayRealVector(samples2.getRowDimension());
@@ -60,13 +59,14 @@ public class Exercicio2 {
 			RealVector xi = samples2.getRowVector(i);
 			double yi = f.yPredito(xi, w);
 			yPreditos2.setEntry(i, yi);
-			System.out.println(yi);
 		}
 		
 		System.out.println("valores preditos para C1: " + yPreditos1);
 		System.out.println("valores preditos para C2: " + yPreditos2);
 		
-		System.out.println("w0 (valor de decisao para classificacao): " + f.calcular_w0(w, samples1, samples2));
+		double w0 = f.calcular_w0(w, samples1, samples2);
+		double y0 = -1.0 * w0;
+		System.out.println("y0 (valor de decisao para classificacao): " + y0);
 		
 		RealVector yPreditos1Classificados = new ArrayRealVector(yPreditos1.getDimension());
 		for (int i = 0; i < yPreditos1.getDimension(); i++) {
@@ -95,10 +95,21 @@ public class Exercicio2 {
 			yPreditos2Pontos.add(p);
 		}
 		
-		GraficoDePontos gFisher = new GraficoDePontos("", "");
-		gFisher.adicionarSerie(yPreditos1Pontos, "C1");
-		gFisher.adicionarSerie(yPreditos2Pontos, "C2");
-		gFisher.exibirGrafico();
+		GraficoDePontos gPreditos = new GraficoDePontos("", "");
+		gPreditos.adicionarSerie(yPreditos1Pontos, "C1");
+		gPreditos.adicionarSerie(yPreditos2Pontos, "C2");
+		gPreditos.exibirGrafico();
+		
+		double[] wtemp = {0.0};
+		RealVector w_ = new ArrayRealVector(wtemp);
+		w_ = w_.append(w);
+		System.out.println();
+		List<PontoDoGrafico> boundaryPoints = f.getPontosDaReta(w_, 1000, -3.5, 6.0, y0);
+		GraficoDePontos gBoundary = new GraficoDePontos("", "");
+		gBoundary.adicionarSerie(pontos1, "C1");
+		gBoundary.adicionarSerie(pontos2, "C2");
+		gBoundary.adicionarSerie(boundaryPoints, "Boundary");
+		gBoundary.exibirGrafico();
 		
 	}
 

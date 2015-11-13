@@ -1,11 +1,16 @@
 package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.math3.distribution.MultivariateNormalDistribution;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
+
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
 
 public class Exercicio2Functions {
 	
@@ -88,5 +93,23 @@ public class Exercicio2Functions {
 		} else {
 			return -1;
 		}
+	}
+	
+	public double yDaReta(RealVector w, double x, double c) {
+		double y = (c - (x * w.getEntry(1)) - w.getEntry(0)) / w.getEntry(2) ;
+		return y;
+	}
+	
+	public List<PontoDoGrafico> getPontosDaReta(RealVector w, double numPontos, double xMin, double xMax, double c) {
+		double comprimento = (xMax - xMin) / numPontos;
+		double xTemp = xMin;
+		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
+		while(xTemp < xMax) {
+			double yTemp = yDaReta(w, xTemp, c);
+			PontoDoGrafico ptemp = new PontoDoGrafico(xTemp, yTemp);
+			pontosDaReta.add(ptemp);
+			xTemp += comprimento;
+		}
+		return pontosDaReta;
 	}
 }
