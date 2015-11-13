@@ -44,9 +44,61 @@ public class Exercicio2 {
 		g.adicionarSerie(pontos2, "C2");
 		g.exibirGrafico();
 
-		RealVector m1 = f.calcularM(samples1);
-		RealMatrix S1 = f.sW(m1, samples1);
-		System.out.println(S1);
+		RealVector w = f.calcularW(samples1, samples2);
+		System.out.println("w: " + w);
+		
+		RealVector yPreditos1 = new ArrayRealVector(samples1.getRowDimension());
+		for (int i = 0; i < samples1.getRowDimension(); i++) {
+			RealVector xi = samples1.getRowVector(i);
+			double yi = f.yPredito(xi, w);
+			yPreditos1.setEntry(i, yi);
+			System.out.println(yi);
+		}
+		
+		RealVector yPreditos2 = new ArrayRealVector(samples2.getRowDimension());
+		for (int i = 0; i < samples2.getRowDimension(); i++) {
+			RealVector xi = samples2.getRowVector(i);
+			double yi = f.yPredito(xi, w);
+			yPreditos2.setEntry(i, yi);
+			System.out.println(yi);
+		}
+		
+		System.out.println("valores preditos para C1: " + yPreditos1);
+		System.out.println("valores preditos para C2: " + yPreditos2);
+		
+		System.out.println("w0 (valor de decisao para classificacao): " + f.calcular_w0(w, samples1, samples2));
+		
+		RealVector yPreditos1Classificados = new ArrayRealVector(yPreditos1.getDimension());
+		for (int i = 0; i < yPreditos1.getDimension(); i++) {
+			double yi = yPreditos1.getEntry(i);
+			int classificacao = f.classificar(yi, w, samples1, samples2);
+			yPreditos1Classificados.setEntry(i, classificacao);
+		}
+		//System.out.println(yPreditos1Classificados);
+		
+		RealVector yPreditos2Classificados = new ArrayRealVector(yPreditos2.getDimension());
+		for (int i = 0; i < yPreditos2.getDimension(); i++) {
+			double yi = yPreditos2.getEntry(i);
+			int classificacao = f.classificar(yi, w, samples1, samples2);
+			yPreditos2Classificados.setEntry(i, classificacao);
+		}
+		//System.out.println(yPreditos2Classificados);
+		
+		List<PontoDoGrafico> yPreditos1Pontos = new ArrayList<PontoDoGrafico>();
+		for (int i = 0; i < yPreditos1.getDimension(); i++) {
+			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos1.getEntry(i));
+			yPreditos1Pontos.add(p);
+		}
+		List<PontoDoGrafico> yPreditos2Pontos = new ArrayList<PontoDoGrafico>();
+		for (int i = 0; i < yPreditos2.getDimension(); i++) {
+			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos2.getEntry(i));
+			yPreditos2Pontos.add(p);
+		}
+		
+		GraficoDePontos gFisher = new GraficoDePontos("", "");
+		gFisher.adicionarSerie(yPreditos1Pontos, "C1");
+		gFisher.adicionarSerie(yPreditos2Pontos, "C2");
+		gFisher.exibirGrafico();
 		
 	}
 
