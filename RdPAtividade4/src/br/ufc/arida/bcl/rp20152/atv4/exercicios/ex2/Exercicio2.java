@@ -29,6 +29,7 @@ public class Exercicio2 {
 		RealMatrix samples1 = f.getNormalSamples(1000, means1, covarianceMatrix);
 		RealMatrix samples2 = f.getNormalSamples(1000, means2, covarianceMatrix);
 		
+/**************** Exercicio Preliminar ******************************************/		
 		List<PontoDoGrafico> pontos1 = new ArrayList<PontoDoGrafico>();
 		List<PontoDoGrafico> pontos2 = new ArrayList<PontoDoGrafico>();
 		for (int i = 0; i < samples1.getRowDimension(); i++) {
@@ -44,6 +45,8 @@ public class Exercicio2 {
 		g.adicionarSerie(pontos2, "C2");
 		g.exibirGrafico();
 
+/**************** Exercicio 2.1 ************************************************/
+		System.out.println("\n**************Exercicio 2.1) ***********************");
 		RealVector w = f.calcularW(samples1, samples2);
 		System.out.println("w: " + w);
 		
@@ -61,45 +64,32 @@ public class Exercicio2 {
 			yPreditos2.setEntry(i, yi);
 		}
 		
-		System.out.println("valores preditos para C1: " + yPreditos1);
-		System.out.println("valores preditos para C2: " + yPreditos2);
+		//System.out.println("valores preditos para C1: " + yPreditos1);
+		//System.out.println("valores preditos para C2: " + yPreditos2);
 		
 		double w0 = f.calcular_w0(w, samples1, samples2);
 		double y0 = -1.0 * w0;
-		System.out.println("y0 (valor de decisao para classificacao): " + y0);
+		System.out.println("\ny0 (valor de decisao para classificacao): " + y0);
+
 		
-		RealVector yPreditos1Classificados = new ArrayRealVector(yPreditos1.getDimension());
-		for (int i = 0; i < yPreditos1.getDimension(); i++) {
-			double yi = yPreditos1.getEntry(i);
-			int classificacao = f.classificar(yi, w, samples1, samples2);
-			yPreditos1Classificados.setEntry(i, classificacao);
-		}
-		//System.out.println(yPreditos1Classificados);
+//		List<PontoDoGrafico> yPreditos1Pontos = new ArrayList<PontoDoGrafico>();
+//		for (int i = 0; i < yPreditos1.getDimension(); i++) {
+//			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos1.getEntry(i));
+//			yPreditos1Pontos.add(p);
+//		}
+//		List<PontoDoGrafico> yPreditos2Pontos = new ArrayList<PontoDoGrafico>();
+//		for (int i = 0; i < yPreditos2.getDimension(); i++) {
+//			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos2.getEntry(i));
+//			yPreditos2Pontos.add(p);
+//		}
 		
-		RealVector yPreditos2Classificados = new ArrayRealVector(yPreditos2.getDimension());
-		for (int i = 0; i < yPreditos2.getDimension(); i++) {
-			double yi = yPreditos2.getEntry(i);
-			int classificacao = f.classificar(yi, w, samples1, samples2);
-			yPreditos2Classificados.setEntry(i, classificacao);
-		}
-		//System.out.println(yPreditos2Classificados);
-		
-		List<PontoDoGrafico> yPreditos1Pontos = new ArrayList<PontoDoGrafico>();
-		for (int i = 0; i < yPreditos1.getDimension(); i++) {
-			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos1.getEntry(i));
-			yPreditos1Pontos.add(p);
-		}
-		List<PontoDoGrafico> yPreditos2Pontos = new ArrayList<PontoDoGrafico>();
-		for (int i = 0; i < yPreditos2.getDimension(); i++) {
-			PontoDoGrafico p = new PontoDoGrafico(i, yPreditos2.getEntry(i));
-			yPreditos2Pontos.add(p);
-		}
-		
-		GraficoDePontos gPreditos = new GraficoDePontos("", "");
-		gPreditos.adicionarSerie(yPreditos1Pontos, "C1");
-		gPreditos.adicionarSerie(yPreditos2Pontos, "C2");
-		gPreditos.exibirGrafico();
-		
+//		GraficoDePontos gPreditos = new GraficoDePontos("", "");
+//		gPreditos.adicionarSerie(yPreditos1Pontos, "C1");
+//		gPreditos.adicionarSerie(yPreditos2Pontos, "C2");
+//		gPreditos.exibirGrafico();
+
+/*************** Exercicio 2.2 **************************************************/
+		System.out.println("\n**************Exercicio 2.2) ***********************");
 		double[] wtemp = {0.0};
 		RealVector w_ = new ArrayRealVector(wtemp);
 		w_ = w_.append(w);
@@ -110,7 +100,41 @@ public class Exercicio2 {
 		gBoundary.adicionarSerie(pontos2, "C2");
 		gBoundary.adicionarSerie(boundaryPoints, "Boundary");
 		gBoundary.exibirGrafico();
+		System.out.println("\nPlotado em interface gráfica");
 		
+		
+/******************* Exercicio 2.3 ***********************************************/
+		System.out.println("\n**************Exercicio 2.3) ***********************");
+		RealVector yPreditos1Classificados = new ArrayRealVector(yPreditos1.getDimension());
+		for (int i = 0; i < yPreditos1.getDimension(); i++) {
+			double yi = yPreditos1.getEntry(i);
+			int classificacao = f.classificar(yi, w, samples1, samples2);
+			yPreditos1Classificados.setEntry(i, classificacao);
+		}
+//		System.out.println(yPreditos1Classificados);
+		
+		RealVector yPreditos2Classificados = new ArrayRealVector(yPreditos2.getDimension());
+		for (int i = 0; i < yPreditos2.getDimension(); i++) {
+			double yi = yPreditos2.getEntry(i);
+			int classificacao = f.classificar(yi, w, samples1, samples2);
+			yPreditos2Classificados.setEntry(i, classificacao);
+		}
+//		System.out.println(yPreditos2Classificados);
+		
+		double acertos = 0.0;
+		for (int i = 0; i < yPreditos1Classificados.getDimension(); i++) {
+			if (yPreditos1Classificados.getEntry(i) == -1) {
+				acertos += 1.0;
+			}
+		}
+		for (int i = 0; i < yPreditos2Classificados.getDimension(); i++) {
+			if (yPreditos2Classificados.getEntry(i) == 1) {
+				acertos += 1.0;
+			}
+		}
+		double n = yPreditos1Classificados.getDimension() + yPreditos2Classificados.getDimension();
+		double taxaDeAcertos = (acertos * 100.0) / n;
+		System.out.println("\nTaxa de classificaçao correta: " + taxaDeAcertos + "%");
 	}
 
 }

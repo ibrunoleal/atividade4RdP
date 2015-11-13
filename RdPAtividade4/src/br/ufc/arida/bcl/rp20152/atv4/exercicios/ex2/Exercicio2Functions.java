@@ -21,7 +21,7 @@ public class Exercicio2Functions {
 	}
 
 	public RealVector calcularM(RealMatrix X) {
-		RealVector m = new ArrayRealVector(2);
+		RealVector m = new ArrayRealVector(X.getColumnDimension());
 		for (int i = 0; i < X.getRowDimension(); i++) {
 			RealVector xi = X.getRowVector(i);
 			m = m.add(xi);
