@@ -36,6 +36,31 @@ public class Exercicio3Functions {
 		fileHandler = new FileHandler(DATA_I_LABELS_TESTING, ";");
 		data_I_labels_testing = new ArrayRealVector(fileHandler.getVetor(0));
 	}
+	
+	public RealMatrix getMatrizPHI(RealMatrix m) {
+		RealMatrix temp = new Array2DRowRealMatrix(m.getRowDimension(), m.getColumnDimension() + 1);
+		for (int i = 0; i < m.getRowDimension(); i++) {
+			for (int j = 0; j < m.getColumnDimension() + 1; j++) {
+				if (j == 0) {
+					temp.setEntry(i, j, 1);
+				} else {
+					temp.setEntry(i, j, m.getEntry(i, j-1));
+				}
+			}
+		}
+		return temp;
+	}
+	
+	public double yPredito(RealVector x, RealVector w) {
+		RealMatrix wm = new Array2DRowRealMatrix(w.toArray());
+		RealMatrix wt = wm.transpose();
+		double a = wt.operate(x).getEntry(0);
+		if (a >= 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
 	public RealMatrix get_Data_I_samples_learning() {
 		return data_I_samples_learning;
