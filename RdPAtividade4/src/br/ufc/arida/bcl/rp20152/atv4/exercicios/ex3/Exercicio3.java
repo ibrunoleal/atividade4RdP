@@ -1,7 +1,13 @@
 package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
+
+import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
 
 public class Exercicio3 {
 
@@ -16,8 +22,28 @@ public class Exercicio3 {
 		perceptron.executar();
 		
 		RealVector w = perceptron.getW();
-		System.out.println("w: " + w);
+		System.out.println(w);
+		double c = perceptron.getC();
 		
+		List<PontoDoGrafico> boundaryPoints = f.getPontosDaReta(w, 1000, -18.0, 18.0, c);
+		
+		List<PontoDoGrafico> pontosC1 = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico> pontosC2 = new ArrayList<PontoDoGrafico>();
+		for (int i = 0; i < PHI_learning.getRowDimension(); i++) {
+			RealVector xi = PHI_learning.getRowVector(i);
+			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
+			int ti = (int)t_learning.getEntry(i);
+			if (ti == 1) {
+				pontosC1.add(pi);
+			} else {
+				pontosC2.add(pi);
+			}
+		}
+		GraficoDePontos gp = new GraficoDePontos("", "");
+		gp.adicionarSerie(pontosC1, "C1");
+		gp.adicionarSerie(pontosC2, "C2");
+		gp.adicionarSerie(boundaryPoints, "boundary");
+		gp.exibirGrafico();
 
 	}
 

@@ -15,7 +15,8 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex3;
  *  
  *    Code adapted from:
  *    https://github.com/RichardKnop/ansi-c-perceptron
- */  
+ */
+
 
 import java.text.*;
 
@@ -33,7 +34,7 @@ public class Perceptron {
 	private RealMatrix samples;
 	private RealVector t;
 	
-	double[] weights = new double[4];// 3 for input variables and one for bias
+	private double[] weights = new double[4];// 3 for input variables and one for bias
 	
 	public Perceptron(RealMatrix PHIsamples, RealVector t) {
 		this.samples = PHIsamples;
@@ -59,10 +60,14 @@ public class Perceptron {
 		double localError, globalError;
 		int p, iteration, output;
 
-		weights[0] = randomNumber(0,1);// w1
-		weights[1] = randomNumber(0,1);// w2
-		weights[2] = randomNumber(0,1);// w3
-		weights[3] = randomNumber(0,1);// this is the bias
+//		weights[0] = randomNumber(0,1);// w1
+//		weights[1] = randomNumber(0,1);// w2
+//		weights[2] = randomNumber(0,1);// w3
+//		weights[3] = randomNumber(0,1);// this is the bias
+		weights[0] = 0.0;// w1
+		weights[1] = 0.0;// w2
+		weights[2] = 0.0;// w3
+		weights[3] = 0.0;// this is the bias
 
 		iteration = 0;
 		do {
@@ -109,6 +114,10 @@ public class Perceptron {
 		double[] wd = {weights[0], weights[1], weights[2]};
 		RealVector w = new ArrayRealVector(wd);
 		return w;
+	}
+	
+	public double getC() {
+		return weights[3];
 	}
 	
 	/**
