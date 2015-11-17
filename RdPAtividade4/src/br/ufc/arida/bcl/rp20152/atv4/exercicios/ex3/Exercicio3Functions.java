@@ -56,7 +56,7 @@ public class Exercicio3Functions {
 		return temp;
 	}
 	
-	public double yPredito(RealVector x, RealVector w) {
+	public int yPredito(RealVector x, RealVector w) {
 		RealMatrix wm = new Array2DRowRealMatrix(w.toArray());
 		RealMatrix wt = wm.transpose();
 		double a = wt.operate(x).getEntry(0);
@@ -89,6 +89,38 @@ public class Exercicio3Functions {
 		MultivariateNormalDistribution mnd = new MultivariateNormalDistribution(means.toArray(), covarianceMatrix.getData());
 		RealMatrix samples = new Array2DRowRealMatrix(mnd.sample(numSamples));
 		return samples;
+	}
+	
+	public RealMatrix concatenarMatrizes(RealMatrix matrizA, RealMatrix matrizB) {
+		int linha = 0;
+		RealMatrix matrizResultante = new Array2DRowRealMatrix(matrizA.getRowDimension() + matrizB.getRowDimension(), matrizA.getColumnDimension());
+		for (int i = 0; i < matrizA.getRowDimension(); i++) {
+			RealVector xi = matrizA.getRowVector(i);
+			matrizResultante.setRowVector(linha, xi);
+			linha++;
+		}
+		for (int i = 0; i < matrizB.getRowDimension(); i++) {
+			RealVector xi = matrizB.getRowVector(i);
+			matrizResultante.setRowVector(linha, xi);
+			linha++;
+		}
+		return matrizResultante;
+	}
+	
+	public RealVector vetorComValorRepetido(int vectorDimension, double valor) {
+		RealVector v = new ArrayRealVector(vectorDimension);
+		for (int i = 0; i < vectorDimension; i++) {
+			v.setEntry(i, valor);
+		}
+		return v;
+	}
+	
+	public int[] realVectorToIntVector(RealVector realVector) {
+		int[] vetor = new int[realVector.getDimension()];
+		for (int i = 0; i < vetor.length; i++) {
+			vetor[i] = (int)realVector.getEntry(i);
+		}
+		return vetor;
 	}
 	
 	public RealMatrix get_Data_I_samples_learning() {
