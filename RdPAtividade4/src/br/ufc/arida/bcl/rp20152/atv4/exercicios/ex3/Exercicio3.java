@@ -24,6 +24,7 @@ public class Exercicio3 {
 		 * Fase de Treinamento
 		 * Dados Learning do exercício 1
 		 */
+		System.out.println("\nExercício 1)\n");
 		Perceptron perceptron = new Perceptron();
 		double threshold = 0.2;
 		double lrate = 0.1;
@@ -33,26 +34,8 @@ public class Exercicio3 {
 		
 		double[] w_ = perceptron.weights;
 		RealVector w = new ArrayRealVector(w_);
-		System.out.println(w);
+		System.out.println("w para dados do ex1: " + w);
 		
-//		List<PontoDoGrafico> boundaryPoints = f.getPontosDaReta(w, 1000, -18.0, 18.0, 0);
-//		List<PontoDoGrafico> pontosC1 = new ArrayList<PontoDoGrafico>();
-//		List<PontoDoGrafico> pontosC2 = new ArrayList<PontoDoGrafico>();
-//		for (int i = 0; i < PHI_learning.getRowDimension(); i++) {
-//			RealVector xi = PHI_learning.getRowVector(i);
-//			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
-//			int ti = (int)t_learning.getEntry(i);
-//			if (ti == -1) {
-//				pontosC1.add(pi);
-//			} else {
-//				pontosC2.add(pi);
-//			}
-//		}
-//		GraficoDePontos gp = new GraficoDePontos("", "");
-//		gp.adicionarSerie(pontosC1, "C1");
-//		gp.adicionarSerie(pontosC2, "C2");
-//		gp.adicionarSerie(boundaryPoints, "boundary");
-//		gp.exibirGrafico();
 		
 		/*
 		 * Etapa de Teste
@@ -89,7 +72,7 @@ public class Exercicio3 {
 		gp.exibirGrafico();
 		
 		double taxaDeAcerto = (numAcertos * 100.0) / yPreditos.getDimension();
-		System.out.println("Taxa de acerto para os dados do exercício 1: " + taxaDeAcerto + "%");
+		System.out.println("Taxa de acerto para os dados de testing do exercício 1: " + taxaDeAcerto + "%");
 		
 		
 		/*
@@ -97,6 +80,8 @@ public class Exercicio3 {
 		 */
 
 		/* Fase learning */
+		System.out.println("\nExercício 2)\n");
+		
 		double[] u1 = {2.5,9.0};
 		RealVector means1 = new ArrayRealVector(u1);
 		
@@ -119,27 +104,7 @@ public class Exercicio3 {
 		perceptron2.Train(samplesAllLearning.getData(), f.realVectorToIntVector(tAllLearning), threshold, lrate, epoch);
 		double[] wAllLearning_ = perceptron2.weights;
 		RealVector wAllLearning = new ArrayRealVector(wAllLearning_);
-		System.out.println(wAllLearning);
-		
-//		List<PontoDoGrafico> pontosSamples1Learning = new ArrayList<PontoDoGrafico>();
-//		List<PontoDoGrafico> pontosSamples2Learning = new ArrayList<PontoDoGrafico>();
-//		for (int i = 0; i < samples1Learning.getRowDimension(); i++) {
-//			RealVector xi = samples1Learning.getRowVector(i);
-//			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
-//			pontosSamples1Learning.add(pi);
-//		}
-//		for (int i = 0; i < samples2Learning.getRowDimension(); i++) {
-//			RealVector xi = samples2Learning.getRowVector(i);
-//			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
-//			pontosSamples2Learning.add(pi);
-//		}
-//		
-//		List<PontoDoGrafico> boundaryPointsLearning = f.getPontosDaReta(wAllLearning, 1000, -3.5, 6.0, 0);
-//		GraficoDePontos gpLearning = new GraficoDePontos("", "");
-//		gpLearning.adicionarSerie(pontosSamples1Learning, "C1");
-//		gpLearning.adicionarSerie(pontosSamples2Learning, "C2");
-//		gpLearning.adicionarSerie(boundaryPointsLearning, "boundary");
-//		gpLearning.exibirGrafico();
+		System.out.println("w para dados do ex2(dados gerados em tempo de execução): " + wAllLearning);
 		
 		/* Fase testing */
 		RealMatrix samples1Testing = f.getMatrizPHI(f.getNormalSamples(1000, means1, covarianceMatrix));
@@ -179,7 +144,7 @@ public class Exercicio3 {
 		
 		double n = y1PreditosTesting.getDimension() + y2PreditosTesting.getDimension();
 		double taxaDeAcerto2 = (acertosTesting * 100.0) / n;
-		System.out.println("Taxa de acerto para os dados do exercício 2: " + taxaDeAcerto2 + "%");
+		System.out.println("Taxa de acerto para os dados do exercício 2(varia de acordo com os dados gerados): " + taxaDeAcerto2 + "%");
 		
 	}
 }
