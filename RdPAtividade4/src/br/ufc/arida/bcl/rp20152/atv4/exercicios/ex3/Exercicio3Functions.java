@@ -3,6 +3,7 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex3;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.distribution.MultivariateNormalDistribution;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -82,6 +83,12 @@ public class Exercicio3Functions {
 			xTemp += comprimento;
 		}
 		return pontosDaReta;
+	}
+	
+	public RealMatrix getNormalSamples(int numSamples, RealVector means, RealMatrix covarianceMatrix) {
+		MultivariateNormalDistribution mnd = new MultivariateNormalDistribution(means.toArray(), covarianceMatrix.getData());
+		RealMatrix samples = new Array2DRowRealMatrix(mnd.sample(numSamples));
+		return samples;
 	}
 	
 	public RealMatrix get_Data_I_samples_learning() {
