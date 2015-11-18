@@ -3,8 +3,11 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex4;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
+import org.math.plot.Plot3DPanel;
 
 import br.ufc.arida.bcl.rp20152.atv4.entidades.Matriz;
 
@@ -65,6 +68,16 @@ public class Exercicio4 {
 
 		double taxa = f.taxaDeSemelhanca(testingPreditos, f.getData_III_labels_testing());
 		System.out.println("taxa de acerto: " + taxa + "%");
+		
+		double[] x = f.getData_III_samples_learning().getColumnVector(0).toArray();
+		double[] y = f.getData_III_samples_learning().getColumnVector(1).toArray();
+		double[] z = f.getData_III_samples_learning().getColumnVector(2).toArray();
+		Plot3DPanel panel = new Plot3DPanel();
+		panel.addScatterPlot("grafico 3d teste", x, y, z);
+		JFrame frame = new JFrame("testanto plot 3d");
+		frame.setSize(1024, 768);
+		frame.setContentPane(panel);
+		frame.setVisible(true);
 	}
 
 }
