@@ -69,7 +69,7 @@ public class Matriz extends Array2DRowRealMatrix {
 	public String toTexString() {
 		DecimalFormat df = new DecimalFormat("0.00000");
 		
-		String texto = "$\n<nome> = \\begin{pmatrix}\n";
+		String texto = "$\nnome = \\begin{pmatrix}\n";
 		for (int i = 0; i < getRowDimension(); i++) {
 			for (int j = 0; j < getColumnDimension(); j++) {
 				String elemento = df.format(getEntry(i, j));

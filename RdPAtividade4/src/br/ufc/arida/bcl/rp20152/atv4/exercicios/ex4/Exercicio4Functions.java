@@ -2,8 +2,11 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex4;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
+import org.apache.commons.math3.stat.correlation.Covariance;
+import org.apache.commons.math3.stat.descriptive.moment.VectorialMean;
 
 import br.ufc.arida.bcl.rp20152.atv4.file.FileHandler;
 
@@ -71,6 +74,32 @@ public class Exercicio4Functions {
 		return m;
 	}
 	
-
-
+	public RealVector meanK(int k) {
+		RealMatrix mk = elementosDaClasseK(k);
+		VectorialMean vm = new VectorialMean(mk.getColumnDimension());
+		for (int i = 0; i < mk.getRowDimension(); i++) {
+			RealVector xi = mk.getRowVector(i);
+			vm.increment(xi.toArray());
+		}
+		return new ArrayRealVector(vm.getResult());
+	}
+	
+	public RealMatrix covarianceMatrixOfK(int k) {
+		RealMatrix Mk = elementosDaClasseK(k);
+		Covariance cov = new Covariance(Mk);
+		return cov.getCovarianceMatrix();
+	}
+	
+	public RealMatrix sigma() {
+		int nRows = covarianceMatrixOfK(0).getRowDimension();
+		int nCols = covarianceMatrixOfK(0).getColumnDimension();
+		RealMatrix Sigma = new Array2DRowRealMatrix(nRows, nCols);
+		for (int k = 0; k < 3; k++) {
+			double pi = piK(k);
+			RealMatrix Sk = covarianceMatrixOfK(k);
+			RealMatrix Temp = Sk.scalarMultiply(pi);
+			Sigma = Sigma.add(Temp);
+		}
+		return Sigma;
+	}
 }
