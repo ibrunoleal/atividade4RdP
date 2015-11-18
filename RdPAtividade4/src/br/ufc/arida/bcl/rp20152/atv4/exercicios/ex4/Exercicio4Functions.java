@@ -102,4 +102,39 @@ public class Exercicio4Functions {
 		}
 		return Sigma;
 	}
+	
+	public RealVector w(int k) {
+		RealVector uk = meanK(k);
+		RealMatrix SigmaI = MatrixUtils.inverse(sigma());
+		return SigmaI.operate(uk);
+	}
+	
+	public double w0(int k) {
+		double pCk = piK(k);
+		RealVector uk = meanK(k);
+		RealMatrix SigmaI = MatrixUtils.inverse(sigma());
+		double ln_pCk = Math.log(pCk);
+		
+		RealMatrix ukT = new Array2DRowRealMatrix(uk.toArray()).transpose();
+		return ukT.scalarMultiply(-1.0/2.0).multiply(SigmaI).operate(uk).mapAdd(ln_pCk).getEntry(0);
+	}
+	
+	public double a(RealVector x, int k) {
+		RealVector wk = w(k);
+		double w0k = w0(k);
+		RealMatrix wkT = new Array2DRowRealMatrix(wk.toArray()).transpose();
+		return wkT.operate(x).mapAdd(w0k).getEntry(0);
+	}
+	
+	public double pCkX(RealVector x, int k) {
+		double ak = Math.exp(a(x, k));
+		
+		double sum = 0;
+		for (int ki = 0; ki < 3; ki++) {
+			double ai = Math.exp(a(x, ki));
+			sum += ai;
+		}
+		
+		return ak / sum;
+	}
 }
