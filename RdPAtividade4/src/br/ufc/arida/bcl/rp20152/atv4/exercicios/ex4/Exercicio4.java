@@ -69,13 +69,30 @@ public class Exercicio4 {
 		double taxa = f.taxaDeSemelhanca(testingPreditos, f.getData_III_labels_testing());
 		System.out.println("taxa de acerto: " + taxa + "%");
 		
-		double[] x = f.getData_III_samples_learning().getColumnVector(0).toArray();
-		double[] y = f.getData_III_samples_learning().getColumnVector(1).toArray();
-		double[] z = f.getData_III_samples_learning().getColumnVector(2).toArray();
+		double[] x0 = M0.getColumnVector(0).toArray();
+		double[] y0 = M0.getColumnVector(1).toArray();
+		double[] z0 = M0.getColumnVector(2).toArray();
+		
+		double[] x1 = M1.getColumnVector(0).toArray();
+		double[] y1 = M1.getColumnVector(1).toArray();
+		double[] z1 = M1.getColumnVector(2).toArray();
+		
+		double[] x2 = M2.getColumnVector(0).toArray();
+		double[] y2 = M2.getColumnVector(1).toArray();
+		double[] z2 = M2.getColumnVector(2).toArray();
+		
 		Plot3DPanel panel = new Plot3DPanel();
-		panel.addScatterPlot("grafico 3d teste", x, y, z);
+		panel.addScatterPlot("grafico 3d teste", x0, y0, z0);
+		panel.addScatterPlot("grafico 3d teste", x1, y1, z1);
+		panel.addScatterPlot("grafico 3d teste", x2, y2, z2);
+		
+		/*
+		 * Para adicionar plano:
+		 * usar panel.addGridPlot(name, X[], Y[], Z[][]);
+		 */
 		JFrame frame = new JFrame("testanto plot 3d");
 		frame.setSize(1024, 768);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(panel);
 		frame.setVisible(true);
 	}
