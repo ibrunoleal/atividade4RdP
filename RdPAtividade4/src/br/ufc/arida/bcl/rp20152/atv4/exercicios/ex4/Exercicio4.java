@@ -70,23 +70,47 @@ public class Exercicio4 {
 		double taxa = f.taxaDeSemelhanca(testingPreditos, f.getData_III_labels_testing());
 		System.out.println("taxa de acerto: " + taxa + "%");
 		
-		double[] x0 = M0.getColumnVector(0).toArray();
-		double[] y0 = M0.getColumnVector(1).toArray();
-		double[] z0 = M0.getColumnVector(2).toArray();
+		/* Grafico do samples learing */
+//		double[] x0 = M0.getColumnVector(0).toArray();
+//		double[] y0 = M0.getColumnVector(1).toArray();
+//		double[] z0 = M0.getColumnVector(2).toArray();
+//		
+//		double[] x1 = M1.getColumnVector(0).toArray();
+//		double[] y1 = M1.getColumnVector(1).toArray();
+//		double[] z1 = M1.getColumnVector(2).toArray();
+//		
+//		double[] x2 = M2.getColumnVector(0).toArray();
+//		double[] y2 = M2.getColumnVector(1).toArray();
+//		double[] z2 = M2.getColumnVector(2).toArray();
+//		
+//		GraficoDePontos3D g = new GraficoDePontos3D("Grafico - Samples Learning");
+//		g.adicionarPontos3D("C1", x0, y0, z0);
+//		g.adicionarPontos3D("C2", x1, y1, z1);
+//		g.adicionarPontos3D("C3", x2, y2, z2);
+//		g.exibirGrafico();
 		
-		double[] x1 = M1.getColumnVector(0).toArray();
-		double[] y1 = M1.getColumnVector(1).toArray();
-		double[] z1 = M1.getColumnVector(2).toArray();
+		/* Grafico do samples testing */	
+		RealMatrix C0 = f.elementosDaClasseK(0, f.getData_III_samples_testing(), f.getData_III_labels_testing());
+		RealMatrix C1 = f.elementosDaClasseK(1, f.getData_III_samples_testing(), f.getData_III_labels_testing());
+		RealMatrix C2 = f.elementosDaClasseK(2, f.getData_III_samples_testing(), f.getData_III_labels_testing());
 		
-		double[] x2 = M2.getColumnVector(0).toArray();
-		double[] y2 = M2.getColumnVector(1).toArray();
-		double[] z2 = M2.getColumnVector(2).toArray();
+		double[] x0_t = C0.getColumnVector(0).toArray();
+		double[] y0_t = C0.getColumnVector(1).toArray();
+		double[] z0_t = C0.getColumnVector(2).toArray();
 		
-		GraficoDePontos3D g = new GraficoDePontos3D("Grafico Exercício 4");
-		g.adicionarPontos3D("C1", x0, y0, z0);
-		g.adicionarPontos3D("C2", x1, y1, z1);
-		g.adicionarPontos3D("C3", x2, y2, z2);
-		g.exibirGrafico();
+		double[] x1_t = C1.getColumnVector(0).toArray();
+		double[] y1_t = C1.getColumnVector(1).toArray();
+		double[] z1_t = C1.getColumnVector(2).toArray();
+		      
+		double[] x2_t = C2.getColumnVector(0).toArray();
+		double[] y2_t = C2.getColumnVector(1).toArray();
+		double[] z2_t = C2.getColumnVector(2).toArray();
+		
+		GraficoDePontos3D gt = new GraficoDePontos3D("Grafico - Samples Testing");
+		gt.adicionarPontos3D("C0", x0_t, y0_t, z0_t);
+		gt.adicionarPontos3D("C1", x1_t, y1_t, z1_t);
+		gt.adicionarPontos3D("C2", x2_t, y2_t, z2_t);
+		gt.exibirGrafico();
 	}
 
 }
