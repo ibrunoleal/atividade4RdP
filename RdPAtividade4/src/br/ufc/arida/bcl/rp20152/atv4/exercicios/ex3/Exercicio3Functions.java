@@ -10,7 +10,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.file.FileHandler;
-import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 public class Exercicio3Functions {
 	
@@ -72,13 +72,13 @@ public class Exercicio3Functions {
 		return y;
 	}
 	
-	public List<PontoDoGrafico> getPontosDaReta(RealVector w, double numPontos, double xMin, double xMax, double c) {
+	public List<PontoDoGrafico2D> getPontosDaReta(RealVector w, double numPontos, double xMin, double xMax, double c) {
 		double comprimento = (xMax - xMin) / numPontos;
 		double xTemp = xMin;
-		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontosDaReta = new ArrayList<PontoDoGrafico2D>();
 		while(xTemp < xMax) {
 			double yTemp = yDaReta(w, xTemp, c);
-			PontoDoGrafico ptemp = new PontoDoGrafico(xTemp, yTemp);
+			PontoDoGrafico2D ptemp = new PontoDoGrafico2D(xTemp, yTemp);
 			pontosDaReta.add(ptemp);
 			xTemp += comprimento;
 		}

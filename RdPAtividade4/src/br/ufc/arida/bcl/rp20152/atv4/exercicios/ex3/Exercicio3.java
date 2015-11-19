@@ -9,7 +9,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
-import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 public class Exercicio3 {
 
@@ -45,14 +45,14 @@ public class Exercicio3 {
 		RealVector t_testing = f.getData_I_labels_testing();
 		
 		RealVector yPreditos =  new ArrayRealVector(PHI_testing.getRowDimension());
-		List<PontoDoGrafico> pontos1 = new ArrayList<PontoDoGrafico>();
-		List<PontoDoGrafico> pontos2 = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontos1 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontos2 = new ArrayList<PontoDoGrafico2D>();
 		int numAcertos = 0;
 		for (int i = 0; i < PHI_testing.getRowDimension(); i++) {
 			RealVector xi = PHI_testing.getRowVector(i);
 			int ypredito = f.yPredito(xi, w);
 			yPreditos.setEntry(i, ypredito);
-			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
+			PontoDoGrafico2D pi = new PontoDoGrafico2D(xi.getEntry(1), xi.getEntry(2));
 			int ti = (int)t_testing.getEntry(i);
 			if (ti == -1) {
 				pontos1.add(pi);
@@ -63,7 +63,7 @@ public class Exercicio3 {
 				numAcertos++;
 			}
 		}
-		List<PontoDoGrafico> boundary = f.getPontosDaReta(w, 1000, -18.0, 18.0, 0);
+		List<PontoDoGrafico2D> boundary = f.getPontosDaReta(w, 1000, -18.0, 18.0, 0);
 		
 		GraficoDePontos gp = new GraficoDePontos("", "");
 		gp.adicionarSerie(pontos1, "C1");
@@ -111,7 +111,7 @@ public class Exercicio3 {
 		RealMatrix samples2Testing = f.getMatrizPHI(f.getNormalSamples(1000, means2, covarianceMatrix));
 		
 		int acertosTesting = 0;
-		List<PontoDoGrafico> pontos1Testing = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontos1Testing = new ArrayList<PontoDoGrafico2D>();
 		RealVector y1PreditosTesting = new ArrayRealVector(samples1Testing.getRowDimension());
 		for (int i = 0; i < samples1Testing.getRowDimension(); i++) {
 			RealVector xi = samples1Testing.getRowVector(i);
@@ -120,10 +120,10 @@ public class Exercicio3 {
 			if (yiPredito == -1) {
 				acertosTesting++;
 			}
-			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
+			PontoDoGrafico2D pi = new PontoDoGrafico2D(xi.getEntry(1), xi.getEntry(2));
 			pontos1Testing.add(pi);
 		}
-		List<PontoDoGrafico> pontos2Testing = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontos2Testing = new ArrayList<PontoDoGrafico2D>();
 		RealVector y2PreditosTesting = new ArrayRealVector(samples2Testing.getRowDimension());
 		for (int i = 0; i < samples2Testing.getRowDimension(); i++) {
 			RealVector xi = samples2Testing.getRowVector(i);
@@ -132,10 +132,10 @@ public class Exercicio3 {
 			if (yiPredito == 1) {
 				acertosTesting++;
 			}
-			PontoDoGrafico pi = new PontoDoGrafico(xi.getEntry(1), xi.getEntry(2));
+			PontoDoGrafico2D pi = new PontoDoGrafico2D(xi.getEntry(1), xi.getEntry(2));
 			pontos2Testing.add(pi);
 		}
-		List<PontoDoGrafico> boundaryPointsTesting = f.getPontosDaReta(wAllLearning, 1000, -3.5, 6.0, 0);
+		List<PontoDoGrafico2D> boundaryPointsTesting = f.getPontosDaReta(wAllLearning, 1000, -3.5, 6.0, 0);
 		GraficoDePontos gpLearning = new GraficoDePontos("", "");
 		gpLearning.adicionarSerie(pontos1Testing, "C1");
 		gpLearning.adicionarSerie(pontos2Testing, "C2");

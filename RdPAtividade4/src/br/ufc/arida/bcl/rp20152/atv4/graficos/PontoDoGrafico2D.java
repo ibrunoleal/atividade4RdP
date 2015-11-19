@@ -2,13 +2,13 @@ package br.ufc.arida.bcl.rp20152.atv4.graficos;
 
 
 
-public class PontoDoGrafico {
+public class PontoDoGrafico2D {
 
 	private double x;
 	
 	private double y;
 	
-	public PontoDoGrafico(double x, double y) {
+	public PontoDoGrafico2D(double x, double y) {
 		super();
 		this.x = x;
 		this.y = y;

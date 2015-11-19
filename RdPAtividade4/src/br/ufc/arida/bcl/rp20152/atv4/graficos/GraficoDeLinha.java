@@ -52,9 +52,9 @@ public class GraficoDeLinha extends JFrame {
 		setContentPane(chartPanel);
 	}
 	
-	public void adicionarSerie(List<PontoDoGrafico> listaDePontos, String nomeDaSerie) {
+	public void adicionarSerie(List<PontoDoGrafico2D> listaDePontos, String nomeDaSerie) {
 		XYSeries serieXY = new XYSeries(nomeDaSerie);
-		for (PontoDoGrafico pontoDoGrafico : listaDePontos) {
+		for (PontoDoGrafico2D pontoDoGrafico : listaDePontos) {
 			serieXY.add(pontoDoGrafico.getX(), pontoDoGrafico.getY());
 		}
 		series.add(serieXY);

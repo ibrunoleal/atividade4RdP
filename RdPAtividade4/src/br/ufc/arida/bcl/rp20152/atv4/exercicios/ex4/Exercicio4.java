@@ -10,6 +10,7 @@ import org.apache.commons.math3.linear.RealVector;
 import org.math.plot.Plot3DPanel;
 
 import br.ufc.arida.bcl.rp20152.atv4.entidades.Matriz;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos3D;
 
 public class Exercicio4 {
 
@@ -81,20 +82,11 @@ public class Exercicio4 {
 		double[] y2 = M2.getColumnVector(1).toArray();
 		double[] z2 = M2.getColumnVector(2).toArray();
 		
-		Plot3DPanel panel = new Plot3DPanel();
-		panel.addScatterPlot("grafico 3d teste", x0, y0, z0);
-		panel.addScatterPlot("grafico 3d teste", x1, y1, z1);
-		panel.addScatterPlot("grafico 3d teste", x2, y2, z2);
-		
-		/*
-		 * Para adicionar plano:
-		 * usar panel.addGridPlot(name, X[], Y[], Z[][]);
-		 */
-		JFrame frame = new JFrame("testanto plot 3d");
-		frame.setSize(1024, 768);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setContentPane(panel);
-		frame.setVisible(true);
+		GraficoDePontos3D g = new GraficoDePontos3D("Grafico Exercício 4");
+		g.adicionarPontos3D("C1", x0, y0, z0);
+		g.adicionarPontos3D("C2", x1, y1, z1);
+		g.adicionarPontos3D("C3", x2, y2, z2);
+		g.exibirGrafico();
 	}
 
 }

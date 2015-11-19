@@ -9,7 +9,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
-import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 public class Exercicio2 {
 
@@ -30,13 +30,13 @@ public class Exercicio2 {
 		RealMatrix samples2 = f.getNormalSamples(1000, means2, covarianceMatrix);
 		
 /**************** Exercicio Preliminar ******************************************/		
-		List<PontoDoGrafico> pontos1 = new ArrayList<PontoDoGrafico>();
-		List<PontoDoGrafico> pontos2 = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontos1 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontos2 = new ArrayList<PontoDoGrafico2D>();
 		for (int i = 0; i < samples1.getRowDimension(); i++) {
-			PontoDoGrafico p1 = new PontoDoGrafico(samples1.getEntry(i, 0), samples1.getEntry(i, 1));
+			PontoDoGrafico2D p1 = new PontoDoGrafico2D(samples1.getEntry(i, 0), samples1.getEntry(i, 1));
 			pontos1.add(p1);
 			
-			PontoDoGrafico p2 = new PontoDoGrafico(samples2.getEntry(i, 0), samples2.getEntry(i, 1));
+			PontoDoGrafico2D p2 = new PontoDoGrafico2D(samples2.getEntry(i, 0), samples2.getEntry(i, 1));
 			pontos2.add(p2);
 		}
 		
@@ -94,7 +94,7 @@ public class Exercicio2 {
 		RealVector w_ = new ArrayRealVector(wtemp);
 		w_ = w_.append(w);
 		System.out.println();
-		List<PontoDoGrafico> boundaryPoints = f.getPontosDaReta(w_, 1000, -3.5, 6.0, y0);
+		List<PontoDoGrafico2D> boundaryPoints = f.getPontosDaReta(w_, 1000, -3.5, 6.0, y0);
 		GraficoDePontos gBoundary = new GraficoDePontos("", "");
 		gBoundary.adicionarSerie(pontos1, "C1");
 		gBoundary.adicionarSerie(pontos2, "C2");

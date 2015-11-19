@@ -1,6 +1,6 @@
 package br.ufc.arida.bcl.rp20152.atv4.graficos;
 
-public class PontoDoGrafico3D extends PontoDoGrafico{
+public class PontoDoGrafico3D extends PontoDoGrafico2D {
 
 	private double z;
 	
@@ -18,7 +18,7 @@ public class PontoDoGrafico3D extends PontoDoGrafico{
 	}
 
 	public String toString() {
-		return "(" + this.getX() + ", " + this.getY() + ", " + this.getZ() + ")";
+		return "(" + getX() + ", " + getY() + ", " + z + ")";
 	}
 	
 }

@@ -8,7 +8,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos;
-import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 
 public class Exercicio1 {
@@ -56,11 +56,11 @@ public class Exercicio1 {
 		System.out.println("\n*******************************************************************");
 		System.out.println("Exercício 1.2)");
 		
-		List<PontoDoGrafico> pontosClasse1 = new ArrayList<PontoDoGrafico>();
-		List<PontoDoGrafico> pontosClasse2 = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontosClasse1 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontosClasse2 = new ArrayList<PontoDoGrafico2D>();
 		for (int i = 0; i < f.getData_I_samples_testing().getRowDimension(); i++) {
 			RealVector xi = f.getData_I_samples_testing().getRowVector(i);
-			PontoDoGrafico p = new PontoDoGrafico(xi.getEntry(0), xi.getEntry(1));
+			PontoDoGrafico2D p = new PontoDoGrafico2D(xi.getEntry(0), xi.getEntry(1));
 			if (labelsPreditosTesting.getEntry(i) == 1) {
 				pontosClasse1.add(p);
 			} else {
@@ -74,10 +74,10 @@ public class Exercicio1 {
 		double numBreaks = 1000.0;
 		double comprimento = (xMax - xMin) / numBreaks;
 		double xTemp = xMin;
-		List<PontoDoGrafico> pontosDaReta = new ArrayList<PontoDoGrafico>();
+		List<PontoDoGrafico2D> pontosDaReta = new ArrayList<PontoDoGrafico2D>();
 		while(xTemp < xMax) {
 			double yTemp = f.yDaReta(w, xTemp, 0);
-			PontoDoGrafico ptemp = new PontoDoGrafico(xTemp, yTemp);
+			PontoDoGrafico2D ptemp = new PontoDoGrafico2D(xTemp, yTemp);
 			pontosDaReta.add(ptemp);
 			xTemp += comprimento;
 		}
