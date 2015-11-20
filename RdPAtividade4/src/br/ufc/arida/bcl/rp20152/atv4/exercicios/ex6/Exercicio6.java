@@ -44,10 +44,10 @@ public class Exercicio6 {
 		double rangeMin3 = StatUtils.min(atributo3.toArray());
 		double rangeMax3 = StatUtils.max(atributo3.toArray());
 		double range3 = new Range(rangeMin3, rangeMax3).getLength();
-//		System.out.println("range do atributo 0: " + range0);
-//		System.out.println("range do atributo 1: " + range1);
-//		System.out.println("range do atributo 2: " + range2);
-//		System.out.println("range do atributo 3: " + range3);
+		System.out.println("range do atributo 0: " + range0);
+		System.out.println("range do atributo 1: " + range1);
+		System.out.println("range do atributo 2: " + range2);
+		System.out.println("range do atributo 3: " + range3);
 
 		
 		double variance0 = StatUtils.variance(atributo0.toArray());
@@ -55,10 +55,10 @@ public class Exercicio6 {
 		double variance2 = StatUtils.variance(atributo2.toArray());
 		double variance3 = StatUtils.variance(atributo3.toArray());
 		System.out.println();
-//		System.out.println("variancia do atributo 0: " + variance0);
-//		System.out.println("variancia do atributo 1: " + variance1);
-//		System.out.println("variancia do atributo 2: " + variance2);
-//		System.out.println("variancia do atributo 3: " + variance3);
+		System.out.println("variancia do atributo 0: " + variance0);
+		System.out.println("variancia do atributo 1: " + variance1);
+		System.out.println("variancia do atributo 2: " + variance2);
+		System.out.println("variancia do atributo 3: " + variance3);
 		
 		StandardDeviation standardDeviation = new StandardDeviation();
 		double sd0 = standardDeviation.evaluate(atributo0.toArray());
@@ -66,25 +66,32 @@ public class Exercicio6 {
 		double sd2 = standardDeviation.evaluate(atributo2.toArray());
 		double sd3 = standardDeviation.evaluate(atributo3.toArray());
 		System.out.println();
-//		System.out.println("desvio padrao do atributo 0: " + sd0);
-//		System.out.println("desvio padrao do atributo 1: " + sd1);
-//		System.out.println("desvio padrao do atributo 2: " + sd2);
-//		System.out.println("desvio padrao do atributo 3: " + sd3);
+		System.out.println("desvio padrao do atributo 0: " + sd0);
+		System.out.println("desvio padrao do atributo 1: " + sd1);
+		System.out.println("desvio padrao do atributo 2: " + sd2);
+		System.out.println("desvio padrao do atributo 3: " + sd3);
 		
 		/* Exercicio 6.2 */
+		System.out.println("\nExercicio 6.2)");
+		
 		RealMatrix X = f.computarMatrizX(f.getData_iris_samples());
 		//System.out.println("Matriz X: \n" + new Matriz(X));
 		
 		RealMatrix S = f.computarMatrizS(f.getData_iris_samples());
-		System.out.println("Matriz S: \n" + new Matriz(S));
+		System.out.println("Matriz S:\n" + new Matriz(S));
 		
 		RealMatrix A = f.matrizDeAutoValores(S);
-		System.out.println("Matriz de auto valores: \n" + new Matriz(A));
+		System.out.println("Matriz de auto valores:\n" + new Matriz(A));
+		
 		RealMatrix P = f.matrizDeAutoVetores(S);
-		System.out.println("Matriz de auto vetores: \n" + new Matriz(P));
+		System.out.println("Matriz de auto vetores:\n" + new Matriz(P));
 
 		RealMatrix Ptil = f.matrizPTil(P);
-		System.out.println("Matriz P_til: \n" + new Matriz(Ptil));
+		System.out.println("Matriz P_til:\n" + new Matriz(Ptil));
+		
+		RealMatrix T = X.multiply(Ptil);
+		//System.out.println("Matriz T:\n" + new Matriz(T));
+
 		
 	}
 
