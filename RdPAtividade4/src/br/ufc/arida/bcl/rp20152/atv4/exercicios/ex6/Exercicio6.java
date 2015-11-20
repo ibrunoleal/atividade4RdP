@@ -3,6 +3,7 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
@@ -72,7 +73,7 @@ public class Exercicio6 {
 		System.out.println("desvio padrao do atributo 3: " + sd3);
 		
 		/* Exercicio 6.2 */
-		System.out.println("\nExercicio 6.2)");
+		System.out.println("\nExercicio 6.2)\n");
 		
 		RealMatrix X = f.computarMatrizX(f.getData_iris_samples());
 		//System.out.println("Matriz X: \n" + new Matriz(X));
@@ -90,8 +91,16 @@ public class Exercicio6 {
 		System.out.println("Matriz P_til:\n" + new Matriz(Ptil));
 		
 		RealMatrix T = X.multiply(Ptil);
-		//System.out.println("Matriz T:\n" + new Matriz(T));
+		//System.out.println("Matriz T:\n" + new Matriz(T).toTexString());
 
+		/* Exercicio 6.3 */
+		RealMatrix T_PHI_learning = f.getMatrizPHI(T);
+		RealVector t_labels_learning = f.getVectorLabels(f.getData_iris_labels());
+		
+		RealVector w = f.wML(T_PHI_learning, t_labels_learning);
+		System.out.println("w obtido na fase learning: " + w);
+		
+		//RealVector classificacaoPredita = new ArrayRealVector(t_labels_learning.getDimension());
 		
 	}
 

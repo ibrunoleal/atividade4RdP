@@ -1,6 +1,7 @@
 package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -118,6 +119,55 @@ public class Exercicio6Functions {
 		return R;
 	}
 
+	public RealMatrix getMatrizPHI(RealMatrix M) {
+		RealMatrix temp = new Array2DRowRealMatrix(M.getRowDimension(), M.getColumnDimension() + 1);
+		for (int i = 0; i < M.getRowDimension(); i++) {
+			for (int j = 0; j < M.getColumnDimension() + 1; j++) {
+				if (j == 0) {
+					temp.setEntry(i, j, 1);
+				} else {
+					temp.setEntry(i, j, M.getEntry(i, j-1));
+				}
+			}
+		}
+		return temp;
+	}
+	
+	public RealVector getVectorLabels(RealMatrix matrizDeLabels) {
+		RealVector vLabels = new ArrayRealVector(matrizDeLabels.getRowDimension());
+		for (int i = 0; i < matrizDeLabels.getRowDimension(); i++) {
+			RealVector xi = matrizDeLabels.getRowVector(i);
+			for (int j = 0; j < xi.getDimension(); j++) {
+				if (xi.getEntry(j) == 1) {
+					vLabels.setEntry(i, j);
+				}
+			}
+		}
+		return vLabels;
+	}
+	
+	public RealVector wML(RealMatrix PHI, RealVector t) {
+		RealMatrix PHI_t = PHI.transpose();
+		RealMatrix A = PHI_t.multiply(PHI);
+		RealMatrix A_I = MatrixUtils.inverse(A);
+		RealMatrix B = A_I.multiply(PHI_t);
+		RealVector r = B.operate(t);
+		return r;
+	}
+	
+	public double yPredito(RealVector x, RealVector w) {
+		RealMatrix wm = new Array2DRowRealMatrix(w.toArray());
+		RealMatrix wt = wm.transpose();
+		return wt.operate(x).getEntry(0);
+	}
+	
+//	public ArrayRealVector computarPredicao(RealMatrix PHI, RealVector w) {
+//		for (int i = 0; i < PHI.getRowDimension(); i++) {
+//			RealVector xi = PHI.getRowVector(i);
+//			double yi = yPredito(xi, w);
+//		}
+//	}
+	
 	public RealMatrix getData_iris_samples() {
 		return data_iris_samples;
 	}
