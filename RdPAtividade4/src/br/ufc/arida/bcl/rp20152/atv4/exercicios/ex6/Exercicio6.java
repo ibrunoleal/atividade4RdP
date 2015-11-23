@@ -3,7 +3,10 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.sasl.RealmCallback;
+
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.stat.StatUtils;
@@ -21,9 +24,9 @@ public class Exercicio6 {
 		
 		Exercicio6Functions f = new Exercicio6Functions();
 		
-		RealMatrix C0 = f.elementosDaClasseK(0, f.getData_iris_samples(), f.getData_iris_labels());
-		RealMatrix C1 = f.elementosDaClasseK(1, f.getData_iris_samples(), f.getData_iris_labels());
-		RealMatrix C2 = f.elementosDaClasseK(2, f.getData_iris_samples(), f.getData_iris_labels());
+//		RealMatrix C0 = f.elementosDaClasseK(0, f.getData_iris_samples(), f.getData_iris_labels());
+//		RealMatrix C1 = f.elementosDaClasseK(1, f.getData_iris_samples(), f.getData_iris_labels());
+//		RealMatrix C2 = f.elementosDaClasseK(2, f.getData_iris_samples(), f.getData_iris_labels());
 		
 		/* Exercício 6.1 */
 		System.out.println("Exercício 6.1)\n");
@@ -94,20 +97,61 @@ public class Exercicio6 {
 		//System.out.println("Matriz T:\n" + new Matriz(T));
 		
 		GraficoDePontos2D gT = new GraficoDePontos2D("Grafico da Matriz T");
-		RealVector labels = f.getVectorLabels(f.getData_iris_labels());
-		for (int i = 0; i < 3; i++) {
-			List<PontoDoGrafico2D> pontos = new ArrayList<PontoDoGrafico2D>();
-			for (int j = 0; j < T.getRowDimension(); j++) {
-				if (labels.getEntry(j) == i) {
-					pontos.add(new PontoDoGrafico2D(T.getEntry(j, 0), T.getEntry(j, 1)));
-				}
+		List<PontoDoGrafico2D> pontosC0 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontosC1 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontosC2 = new ArrayList<PontoDoGrafico2D>();
+		for (int i = 0; i < T.getRowDimension(); i++) {
+			RealVector xi = T.getRowVector(i);
+			int classe = f.getClasse(f.getData_iris_labels().getRowVector(i));
+			PontoDoGrafico2D ponto = new PontoDoGrafico2D(xi.getEntry(0), xi.getEntry(1));
+			switch (classe) {
+			case 0:
+				pontosC0.add(ponto);
+				break;
+			case 1:
+				pontosC1.add(ponto);
+				break;
+			case 2:
+				pontosC2.add(ponto);
+				break;
+			default:
+				break;
 			}
-			gT.adicionarPontos2D("Classe" + i , pontos);
 		}
+		gT.adicionarPontos2D("C0", pontosC0);
+		gT.adicionarPontos2D("C1", pontosC1);
+		gT.adicionarPontos2D("C2", pontosC2);
 		gT.exibirGrafico();
 
 		/* Exercicio 6.3 */
-
+		
+		RealMatrix PHI_T = f.getMatrizPHI(T);
+		RealVector t0 = f.getData_iris_labels().getColumnVector(0);
+		RealVector t1 = f.getData_iris_labels().getColumnVector(1);
+		RealVector t2 = f.getData_iris_labels().getColumnVector(2);
+		
+		RealVector w0 = f.wML(PHI_T, t0);
+		RealVector w1 = f.wML(PHI_T, t1);
+		RealVector w2 = f.wML(PHI_T, t2);
+		System.out.println("w0: " + w0);
+		System.out.println("w1: " + w0);
+		System.out.println("w2: " + w0);
+		System.out.println();
+		
+		RealMatrix W = new Array2DRowRealMatrix(3, 3);
+		W.setRowVector(0, w0);
+		W.setRowVector(1, w1);
+		W.setRowVector(2, w2);
+		
+		RealVector labelsPreditos = new ArrayRealVector(T.getRowDimension());
+		for (int i = 0; i < PHI_T.getRowDimension(); i++) {
+			RealVector xi = PHI_T.getRowVector(i);
+			int classe = f.classificar(xi, W);
+			labelsPreditos.setEntry(i, classe);
+		}
+		
+		double taxa = f.taxaDeSemelhanca(labelsPreditos, f.getVectorLabels(f.getData_iris_labels()));
+		System.out.println("Taxa de Acerto: " + taxa);
 		
 	}
 

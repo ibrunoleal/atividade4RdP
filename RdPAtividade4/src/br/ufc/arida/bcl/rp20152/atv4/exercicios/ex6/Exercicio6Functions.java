@@ -1,5 +1,7 @@
 package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 
+import java.util.List;
+
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.EigenDecomposition;
@@ -133,19 +135,6 @@ public class Exercicio6Functions {
 		return temp;
 	}
 	
-	public RealVector getVectorLabels(RealMatrix matrizDeLabels) {
-		RealVector vLabels = new ArrayRealVector(matrizDeLabels.getRowDimension());
-		for (int i = 0; i < matrizDeLabels.getRowDimension(); i++) {
-			RealVector xi = matrizDeLabels.getRowVector(i);
-			for (int j = 0; j < xi.getDimension(); j++) {
-				if (xi.getEntry(j) == 1) {
-					vLabels.setEntry(i, j);
-				}
-			}
-		}
-		return vLabels;
-	}
-	
 	public RealVector wML(RealMatrix PHI, RealVector t) {
 		RealMatrix PHI_t = PHI.transpose();
 		RealMatrix A = PHI_t.multiply(PHI);
@@ -169,12 +158,38 @@ public class Exercicio6Functions {
 		return vetor;
 	}
 	
-//	public ArrayRealVector computarPredicao(RealMatrix PHI, RealVector w) {
-//		for (int i = 0; i < PHI.getRowDimension(); i++) {
-//			RealVector xi = PHI.getRowVector(i);
-//			double yi = yPredito(xi, w);
-//		}
-//	}
+	public int classificar(RealVector x, RealMatrix W) {
+		RealVector ys = new ArrayRealVector(W.getRowDimension());
+		for (int i = 0; i < W.getRowDimension(); i++) {
+			RealVector wi = W.getRowVector(i);
+			double yi = yPredito(x, wi);
+			ys.setEntry(i, yi);
+		}
+		return ys.getMaxIndex();
+	}
+	
+	public int getClasse(RealVector label) {
+		for (int i = 0; i < label.getDimension(); i++) {
+			if (label.getEntry(i) == 1) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public double taxaDeSemelhanca(RealVector v1, RealVector v2) {
+		int cont = 0;
+		if (v1.getDimension() == v2.getDimension()) {
+			for (int i = 0; i < v1.getDimension(); i++) {
+				if (v1.getEntry(i) == v2.getEntry(i)) {
+					cont++;
+				}
+			}
+			double taxa = (cont * 100.0) / v1.getDimension();
+			return taxa;
+		}
+		return 0;
+	}
 	
 	public RealMatrix getData_iris_samples() {
 		return data_iris_samples;
@@ -192,6 +207,17 @@ public class Exercicio6Functions {
 		this.data_iris_labels = data_iris_labels;
 	}
 	
-	
+	public RealVector getVectorLabels(RealMatrix matrizDeLabels) {
+		RealVector vLabels = new ArrayRealVector(matrizDeLabels.getRowDimension());
+		for (int i = 0; i < matrizDeLabels.getRowDimension(); i++) {
+			RealVector xi = matrizDeLabels.getRowVector(i);
+			for (int j = 0; j < xi.getDimension(); j++) {
+				if (xi.getEntry(j) == 1) {
+					vLabels.setEntry(i, j);
+				}
+			}
+		}
+		return vLabels;
+	}
 
 }
