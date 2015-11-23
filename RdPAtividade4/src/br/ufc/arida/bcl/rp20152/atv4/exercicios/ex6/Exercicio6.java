@@ -3,17 +3,17 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.math3.linear.ArrayRealVector;
-import org.apache.commons.math3.linear.EigenDecomposition;
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
-import org.apache.commons.math3.util.MathArrays;
 
 import com.orsoncharts.Range;
 
 import br.ufc.arida.bcl.rp20152.atv4.entidades.Matriz;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.GraficoDePontos2D;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 public class Exercicio6 {
 
@@ -91,16 +91,23 @@ public class Exercicio6 {
 		System.out.println("Matriz P_til:\n" + new Matriz(Ptil));
 		
 		RealMatrix T = X.multiply(Ptil);
-		//System.out.println("Matriz T:\n" + new Matriz(T).toTexString());
+		//System.out.println("Matriz T:\n" + new Matriz(T));
+		
+		GraficoDePontos2D gT = new GraficoDePontos2D("Grafico da Matriz T");
+		RealVector labels = f.getVectorLabels(f.getData_iris_labels());
+		for (int i = 0; i < 3; i++) {
+			List<PontoDoGrafico2D> pontos = new ArrayList<PontoDoGrafico2D>();
+			for (int j = 0; j < T.getRowDimension(); j++) {
+				if (labels.getEntry(j) == i) {
+					pontos.add(new PontoDoGrafico2D(T.getEntry(j, 0), T.getEntry(j, 1)));
+				}
+			}
+			gT.adicionarPontos2D("Classe" + i , pontos);
+		}
+		gT.exibirGrafico();
 
 		/* Exercicio 6.3 */
-		RealMatrix T_PHI_learning = f.getMatrizPHI(T);
-		RealVector t_labels_learning = f.getVectorLabels(f.getData_iris_labels());
-		
-		RealVector w = f.wML(T_PHI_learning, t_labels_learning);
-		System.out.println("w obtido na fase learning: " + w);
-		
-		//RealVector classificacaoPredita = new ArrayRealVector(t_labels_learning.getDimension());
+
 		
 	}
 

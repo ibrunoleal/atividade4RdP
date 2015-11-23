@@ -161,6 +161,14 @@ public class Exercicio6Functions {
 		return wt.operate(x).getEntry(0);
 	}
 	
+	public RealVector vetorDeMesmoValor(int dimension, double valor) {
+		RealVector vetor = new ArrayRealVector(dimension);
+		for (int i = 0; i < dimension; i++) {
+			vetor.setEntry(i, valor);
+		}
+		return vetor;
+	}
+	
 //	public ArrayRealVector computarPredicao(RealMatrix PHI, RealVector w) {
 //		for (int i = 0; i < PHI.getRowDimension(); i++) {
 //			RealVector xi = PHI.getRowVector(i);
