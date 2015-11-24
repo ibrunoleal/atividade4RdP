@@ -1,5 +1,6 @@
 package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
@@ -12,6 +13,7 @@ import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import br.ufc.arida.bcl.rp20152.atv4.file.FileHandler;
+import br.ufc.arida.bcl.rp20152.atv4.graficos.PontoDoGrafico2D;
 
 public class Exercicio6Functions {
 	
@@ -218,6 +220,46 @@ public class Exercicio6Functions {
 			}
 		}
 		return vLabels;
+	}
+	
+	public List<List<PontoDoGrafico2D>> pontosAll(double xMin, double xMax, double yMin, double yMax, int breaksX, int breaksY, RealMatrix W) {
+		List<List<PontoDoGrafico2D>> lista = new ArrayList<List<PontoDoGrafico2D>>();
+		
+		double xTemp = xMin;
+		double yTemp = yMin;
+		double comprimentoX = (xMax - xMin) / breaksX;
+		double comprimentoY = (yMax - yMin) / breaksY;
+		List<PontoDoGrafico2D> pontosC0 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontosC1 = new ArrayList<PontoDoGrafico2D>();
+		List<PontoDoGrafico2D> pontosC2 = new ArrayList<PontoDoGrafico2D>();
+		for (int i = 0; i < breaksX; i++) {
+			yTemp = yMin;
+			for (int j = 0; j < breaksY; j++) {
+				PontoDoGrafico2D p = new PontoDoGrafico2D(xTemp, yTemp);
+				double[] vi = {1.0, xTemp, yTemp};
+				RealVector pi = new ArrayRealVector(vi);
+				int classe = classificar(pi, W);
+				switch (classe) {
+				case 0:
+					pontosC0.add(p);
+					break;
+				case 1:
+					pontosC1.add(p);
+					break;
+				case 2:
+					pontosC2.add(p);
+					break;
+				default:
+					break;
+				}
+				yTemp += comprimentoY;
+			}
+			xTemp += comprimentoX;
+		}
+		lista.add(pontosC0);
+		lista.add(pontosC1);
+		lista.add(pontosC2);
+		return lista;
 	}
 
 }

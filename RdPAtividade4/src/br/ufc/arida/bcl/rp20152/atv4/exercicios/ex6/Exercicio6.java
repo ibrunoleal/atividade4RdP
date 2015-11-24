@@ -3,8 +3,6 @@ package br.ufc.arida.bcl.rp20152.atv4.exercicios.ex6;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.sasl.RealmCallback;
-
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -134,8 +132,8 @@ public class Exercicio6 {
 		RealVector w1 = f.wML(PHI_T, t1);
 		RealVector w2 = f.wML(PHI_T, t2);
 		System.out.println("w0: " + w0);
-		System.out.println("w1: " + w0);
-		System.out.println("w2: " + w0);
+		System.out.println("w1: " + w1);
+		System.out.println("w2: " + w2);
 		System.out.println();
 		
 		RealMatrix W = new Array2DRowRealMatrix(3, 3);
@@ -152,6 +150,18 @@ public class Exercicio6 {
 		
 		double taxa = f.taxaDeSemelhanca(labelsPreditos, f.getVectorLabels(f.getData_iris_labels()));
 		System.out.println("Taxa de Acerto: " + taxa);
+		
+		GraficoDePontos2D g = new GraficoDePontos2D("Grafico Exercicio 6.3");
+		g.adicionarPontos2D("C1", pontosC0);
+		g.adicionarPontos2D("C1", pontosC1);
+		g.adicionarPontos2D("C1", pontosC2);
+		double[][] linhaA = {{0.00999, -0.01471}, {0.07999, 2.92500}};
+		double[][] linhaB = {{0.00999, -0.01471}, {-2.86000, -3.00000}};
+		double[][] linhaC = {{0.00999, -0.01471}, {3.92990, -1.87499}};
+		g.addLinePlot("A0", linhaA);
+		g.addLinePlot("A1", linhaB);
+		g.addLinePlot("A2", linhaC);
+		g.exibirGrafico();
 		
 	}
 

@@ -34,7 +34,7 @@ public class GraficoDePontos3D extends Plot3DPanel {
 	public void exibirGrafico() {
 		JFrame frame = new JFrame(tituloDaAplicacao);
 		frame.setSize(1024, 768);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(this);
 		frame.setVisible(true);
 	}
